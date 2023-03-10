@@ -1,11 +1,10 @@
-##################################################
+########################################################################################################################
 ###Noah Jones
 ###CSC-325
 ###Date: 3/8/2023
 ###Program 0 Python Again
-##################################################
-
 ###Description: Simple python linked list implemented with node class along with a selection sort algorithm for the list
+########################################################################################################################
 
 #Import necessary packages for random number generation for node values
 from random import randint
@@ -53,7 +52,8 @@ class LinkedList:
             raise Exception("invalid list length")
         else:
             self.list_length=length
-        #Head will be assigned in next seciton
+
+        #Creation of head node
         self.head=Node(randint(0,100))
 
         #Populate list with nodes
@@ -92,6 +92,7 @@ class LinkedList:
     #Print out list
     def print_list(self):
         current = self.head
+        #Print out value of each node until we get to a node that has no next node value
         while True:
             if current.next == None:
                 break
@@ -99,7 +100,7 @@ class LinkedList:
                 print(current.value, end=" ")
                 current=current.next
 
-    #Swap function
+    #Swap function as to make sort function code cleaner
     def swap(self,node, node_to_swap):
         #Keep temporoaty variable to 1st node
         temp_val = node.value
@@ -125,7 +126,7 @@ class LinkedList:
             #Iterate to the first node we will compare our starting node with
             current_node=start_node.next
 
-            #Check for edge case if the first node is less than the second node 
+            #Check for edge case, if the first node is less than the second node 
             if start_min < current_node.value:
                 new_min=start_min
                 new_min_node=start_node
@@ -159,11 +160,22 @@ class LinkedList:
 ################################
 
 #Get number of nodes from user input
-start=int(input("Please, enter the number of nodes: "))
+start=(input("Please, enter the number of nodes: "))
+while True:
+    #check if input is either float or a string/character
+    if (isinstance(start, float) == False) and (start.isdigit()==True):
+        #covnert to integer
+        start=int(start)
+        #Check if integer is positive
+        if start > 0:
+            break            
+    #Otherwise take another input
+    else:
+        start=(input("\nPlease, enter the correct number of nodes: "))
+        
 
 #Unsorted
 my_list = LinkedList(start)
-print("\n")
 print("Unsorted list:", end=" ")
 my_list.print_list()
 print("\nHead Data: " , my_list.get_head().value, end=" ")
@@ -173,7 +185,7 @@ print("\n")
 
 #Sorted
 my_list.Ssort()
-print("\nSorted List: ", end=" ")
+print("Sorted List: ", end=" ")
 my_list.print_list()
 print("\nHead Data: " , my_list.get_head().value, end=" ")
 print("\nTail Data: " , my_list.get_tail(), end=" ")
