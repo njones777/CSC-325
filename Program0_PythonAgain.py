@@ -101,10 +101,10 @@ class LinkedList:
                 current=current.next
 
     #Swap function as to make sort function code cleaner
-    def swap(self,node, node_to_swap):
-        #Keep temporoaty variable to 1st node
+    def swap(self, node, node_to_swap):
+        #Keep temporoaty variable from 1st node
         temp_val = node.value
-        #Set 1st node to value of 2nd 
+        #Set 1st node value to value of 2nd 
         node.set_node_val=node_to_swap.value
         #Set value of 2nd node to the original value of the 1st node
         node_to_swap.set_node_val=temp_val
@@ -119,9 +119,11 @@ class LinkedList:
         #Traverse list
         #For loop to analyse one item agains the rest of the remaining unsorted list
         for i in range(self.list_length):
+            
+            #Assume that the smallest value is the starting node
             new_min=start_min
             new_min_node=start_node
-            #variable to hold our new minimum value if we find one
+
             
             #Iterate to the first node we will compare our starting node with
             current_node=start_node.next
@@ -134,11 +136,14 @@ class LinkedList:
             #Compare 
             for j in range(i+1,self.list_length):
                     
+                #If our new_min is greater than the current node we are on update the new_min value and node
                 if new_min > current_node.value:
                     new_min=current_node.value
                     new_min_node=current_node
+                #If the next node is empty then we have reached the end of the list so break
                 if current_node.next == None:
                     break
+                #Go to next node otherwise
                 else:
                     current_node = current_node.next
 
@@ -147,7 +152,7 @@ class LinkedList:
                 #Swap the node values, NOT the object
                 self.swap(start_node, new_min_node)
         
-            #Increment the starting position
+            #Increment the starting position and starting minimum value
             start_node=start_node.next
             start_min=start_node.value
             
@@ -166,15 +171,13 @@ while True:
     if (isinstance(start, float) == False) and (start.isdigit()==True):
         #covnert to integer
         start=int(start)
-        #Check if integer is positive
+        #Check if integer is positive, if so then break out of loop
         if start > 0:
             break            
     #Otherwise take another input
-    else:
-        start=(input("\nPlease, enter the correct number of nodes: "))
+    start=(input("\nPlease, enter the correct number of nodes: "))
         
-
-#Unsorted
+#Unsorted portiton of output
 my_list = LinkedList(start)
 print("Unsorted list:", end=" ")
 my_list.print_list()
@@ -183,7 +186,7 @@ print("\nTail Data: " , my_list.get_tail(), end=" ")
 print("\n")
 
 
-#Sorted
+#Sorted portion of output
 my_list.Ssort()
 print("Sorted List: ", end=" ")
 my_list.print_list()
