@@ -8,7 +8,7 @@
 
 #Import necessary packages for random number generation for node values
 from random import randint
-
+import time
 
 #Node Class
 class Node:
@@ -47,11 +47,9 @@ class Node:
 #Linked list class
 class LinkedList:
     def __init__(self, length):
-        #Check for edge cases
-        if length < 0:
-            raise Exception("invalid list length")
-        else:
-            self.list_length=length
+
+        #Keep user provided list length for other functions
+        self.list_length=length
 
         #Creation of head node
         self.head=Node(randint(0,100))
@@ -134,7 +132,7 @@ class LinkedList:
                 new_min_node=start_node
 
             #Compare 
-            for j in range(i+1,self.list_length):
+            for j in range(i+1, self.list_length):
                     
                 #If our new_min is greater than the current node we are on update the new_min value and node
                 if new_min > current_node.value:
@@ -176,7 +174,9 @@ while True:
             break            
     #Otherwise take another input
     start=(input("\nPlease, enter the correct number of nodes: "))
-        
+
+
+#start_time=time.time()
 #Unsorted portiton of output
 my_list = LinkedList(start)
 print("Unsorted list:", end=" ")
@@ -186,6 +186,7 @@ print("\nTail Data: " , my_list.get_tail(), end=" ")
 print("\n")
 
 
+start_time=time.time()
 #Sorted portion of output
 my_list.Ssort()
 print("Sorted List: ", end=" ")
@@ -193,4 +194,6 @@ my_list.print_list()
 print("\nHead Data: " , my_list.get_head().value, end=" ")
 print("\nTail Data: " , my_list.get_tail(), end=" ")
 print("\n")
+
+print("--- execution time %s seconds --- " %(time.time()-start_time))
 
